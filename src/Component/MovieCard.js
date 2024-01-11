@@ -1,18 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import MovieList from "./MovieList";
 import "./Card.css";
 import Rating from "react-rating-stars-component";
+import SerieFilter from "./SerieFilter";
 
 function SerieCard() {
+  const [filter, setFilter] = useState({ title: "", rate: "" });
+
+  const handleFilterChange = (newFilter) => {
+    setFilter(newFilter);
+  };
+
+  const filteredSeries = MovieList.filter((movie) => {
+    return (
+      movie.MovieName.toLowerCase().includes(filter.title.toLowerCase()) &&
+      (filter.rate === "" || movie.valueStars.toString() === filter.rate)
+    );
+  });
+
   return (
     <div>
-      {MovieList.map((Serie, index) => (
+      <SerieFilter onFilterChange={handleFilterChange} />
+      {filteredSeries.map((Serie) => (
         <Card
-          key={index}
+          key={Serie.id}
           style={{
-            width: "18rem",
             left: "50%",
             width: "400px",
             height: "auto",

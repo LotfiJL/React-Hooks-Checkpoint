@@ -4,7 +4,6 @@ import SerieCard from "./Component/MovieCard";
 function App() {
   return (
     <div className="App">
-      <Navbar />
       <SerieCard />
     </div>
   );
