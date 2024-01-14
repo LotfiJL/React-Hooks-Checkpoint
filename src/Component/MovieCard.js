@@ -1,19 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import MovieList from "./MovieList";
 import "./Card.css";
 import Rating from "react-rating-stars-component";
 import SerieFilter from "./SerieFilter";
+import AddMovieForm from "./NewMovie";
 
 function SerieCard() {
   const [filter, setFilter] = useState({ title: "", rate: "" });
+  const [valueStars, setValueStars] = useState(0);
+  const [movies, setMovies] = useState(MovieList);
+
+  const handleAddMovie = (newMovie) => {
+    setMovies([...movies, newMovie]);
+  };
+  const handleRatingChange = (newRating) => {
+    setValueStars(newRating);
+  };
+
+  useEffect(() => {
+    alert("AlreadyRated  \n Thanks for your Rating");
+  }, [valueStars]);
 
   const handleFilterChange = (newFilter) => {
     setFilter(newFilter);
   };
 
-  const filteredSeries = MovieList.filter((movie) => {
+  const filteredSeries = movies.filter((movie) => {
     return (
       movie.MovieName.toLowerCase().includes(filter.title.toLowerCase()) &&
       (filter.rate === "" || movie.valueStars.toString() === filter.rate)
@@ -21,15 +35,16 @@ function SerieCard() {
   });
 
   return (
-    <div>
+    <div className="bg-black">
       <SerieFilter onFilterChange={handleFilterChange} />
+
       {filteredSeries.map((Serie) => (
         <Card
           key={Serie.id}
           style={{
-            left: "50%",
-            width: "400px",
+            width: "300px",
             height: "auto",
+            margin: "auto",
           }}
         >
           <Card.Img variant="top" src={Serie.Cover} />
@@ -43,13 +58,14 @@ function SerieCard() {
               size={24}
               activeColor="#ffd700"
               inactiveColor="#ddd"
-              edit={false}
+              onChange={handleRatingChange}
             />
 
             <Button variant="primary">Go somewhere</Button>
           </Card.Body>
         </Card>
       ))}
+      <AddMovieForm onAddMovie={handleAddMovie} />
     </div>
   );
 }

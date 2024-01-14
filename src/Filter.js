@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function SerieFilter({ onFilterChange }) {
+function Filter({ onFilterChange }) {
   const [title, setTitle] = useState("");
   const [rate, setRate] = useState("");
 
@@ -8,6 +8,7 @@ function SerieFilter({ onFilterChange }) {
     setTitle(event.target.value);
     onFilterChange({ title: event.target.value, rate });
   };
+
   const handleRateChange = (event) => {
     setRate(event.target.value);
     onFilterChange({ title, rate: event.target.value });
@@ -33,4 +34,5 @@ function SerieFilter({ onFilterChange }) {
   );
 }
 
-export default SerieFilter;
+export default Filter;
+    
