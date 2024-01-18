@@ -1,10 +1,14 @@
-div #Resume {
+div p {
   width: 50%;
   display: inline-block;
-  background-color: rgb(229, 222, 214);
+  background-color: antiquewhite;
   font-size: small;
   font-family: "Times New Roman", Times, serif;
   text-align: left;
+}
+
+div {
+  background-color: cornsilk;
 }
 
 iframe {

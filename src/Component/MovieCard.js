@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import MovieList from "./MovieList";
 import "./Card.css";
 import Rating from "react-rating-stars-component";
 import SerieFilter from "./SerieFilter";
 import AddMovieForm from "./NewMovie";
+import { Link } from "react-router-dom";
 
 function SerieCard() {
   const [filter, setFilter] = useState({ title: "", rate: "" });
@@ -35,7 +36,7 @@ function SerieCard() {
   });
 
   return (
-    <div className="bg-black">
+    <div className="bg-dark ">
       <SerieFilter onFilterChange={handleFilterChange} />
 
       {filteredSeries.map((Serie) => (
@@ -61,7 +62,7 @@ function SerieCard() {
               onChange={handleRatingChange}
             />
 
-            <Button variant="primary">Go somewhere</Button>
+            <Link to={`/DescTrailer/${Serie.MovieName}`}>See More</Link>
           </Card.Body>
         </Card>
       ))}

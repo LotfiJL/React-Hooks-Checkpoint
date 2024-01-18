@@ -48,6 +48,7 @@ function AddMovieForm({ onAddMovie }) {
         value={valueStars}
         onChange={(e) => setValueStars(e.target.value)}
       />
+
       <button onClick={handleAddMovie}>Add Movie</button>
     </div>
   );
